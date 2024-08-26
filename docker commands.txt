@@ -1,27 +1,55 @@
-1.docker images → // give all the images present in your machine
+docker pull nginx ------ pulling nginx images from docker reistry
+docker pull nginx:1.20 ------- pulling nginx images of version no. 1.20 from docker registry
+docker images -------- gives the list of images
+docker run nginx -------- creates  nginx image into container
+docker ps ---------- list of containers
+docker ps -a ---------- list of stopped & running containers
+docker run -d nginx ------ to run/create container in background
+docker run -p 80:80 -d nginx    ------ mapping the container port & host port
 
-2.docker search ubuntu → // search whether the image of ubuntu is present locally and if not present then it pull it from docker hub
+docker rm 78c6f95a5006 ------------ to remove container before to delete stop the container
+docker run --name test -d nginx ---------- to give custome name
+docker rename 4ea75d719635 test1 ------- to rename the container
+docker start <con-id> ------------   to start container
+docker stop < con-id>     ---------- to stop con.
+docker delete < con-id/ con-name> --------- to delete con.
 
-3.docker pull ubuntu → pull image from docker hub
+# to delete an image first we need to remove container
 
-4.service docker start → checks whether service is start or not
+docker run --help ----- to get help on run command
+docker run -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=password -p 27017:270
+17 -d mongo:4.4.6                               ---------- to give ENV Variables
 
-5.docker start <container name> → start the container
+docker logs <con-id> ------ to check docker logs
+docker inspect <con-id> ------- to get cont info
+docker network ls -------- to find the n/w in the host, 3 n/w which is  bridge, host & null
 
-6.exit → to exit from container
+# null n/w can't able to access resorces outside the container in null network, only inside res.
 
-7.docker attach <container name > → to go inside a running container
+docker run -d --network none alpine ------- running cont in none n/we
 
-8.docker ps -a →to see all the containers
+# the only purpose of container is to run services not os ex : alpine it will excited
 
-9.docker ps → to see only running containers
+docker exec -it 4a7b1ea3a6f6 sh  ------ t get into container
 
-10.docker run -it  - name <container name> <image name> /bin /bash →to give name to a container
+# Bridge n/w can access both in container & outside the container
 
-11.docker stop <container name> → to stop running container
+ #  by default it's bride n/w 
+docker run -d --network none alpine sleep 500 -------- running in bridge n/w
 
-12.docker rm < container name > → to delete a container
+# to access container with container name we should cretae custome bridge n/w, 
+to access any container in the network we should create custome brideg n/w 
 
-13. docker info --> check status
+docker stop $(docker ps -a) ---------- to stop all cont.
+docker rm $(docker ps -a)
 
-14.cat /etc/os-release --> to check the version of linux in your container
+docker build -t  todo-api:1.0.0 .-------- use to tag an image
+
+docker volume create <vol-name> --------- to create vol
+docker volume ls -------- t list volumes
+docker volume ls -f 9vol-name -------- to filter
+docker inspect volume <vol-name>
+
+#volumes can be shared & also can be multiple vol can be mounted to containers
+
+docker volume rm mongo-data -------- to remove vol firts we have detached vol from con
